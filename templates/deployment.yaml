@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      containers:
+      - name: {{ .Release.Name }}
+        image: "repository:541407012130.dkr.ecr.us-east-1.amazonaws.com/"{{ .Values.image.name }}:{{ .Values.image.tag }}:
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        env:
+          - name: ENV
+            value: {{ .Values.env.ENV | quote }}
+          - name: DEPLOY_ENV
+            value: {{ .Values.env.DEPLOY_ENV | quote }}
+          - name: DB_HOST
+            value: {{ .Values.env.DB_HOST | quote }}
+          - name: DB_PORT
+            value: {{ .Values.env.DB_PORT | quote }}
+          - name: DB_NAME
+            value: {{ .Values.env.DB_NAME | quote }}
+          - name: DB_USERNAME
+            value: {{ .Values.env.DB_USERNAME | quote }}
+          - name: DB_PASSWORD
+            value: {{ .Values.env.DB_PASSWORD | quote }}
+          - name: REDIS_HOST
+            value: {{ .Values.env.REDIS_HOST | quote }}
+          - name: REDIS_PORT
+            value: {{ .Values.env.REDIS_PORT | quote }}
+          - name: DB_SCHEMA
+            value: {{ .Values.env.DB_SCHEMA | quote }}
+      {{- if .Values.resources.enabled }}
+        resources:      
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
+        {{- end }}
+        {{- if .Values.readinessProbe.enabled }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.readinessProbe.httpGet.path }}
+            port: {{ .Values.readinessProbe.httpGet.port }}
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+          failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+        {{- end }}
+        {{- if .Values.livenessProbe.enabled }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.livenessProbe.httpGet.path }}
+            port: {{ .Values.livenessProbe.httpGet.port }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          successThreshold: {{ .Values.livenessProbe.successThreshold }}
+        {{- end }}

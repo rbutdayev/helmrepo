@@ -1,1 +1,0 @@
-include ${INFRA_DIR}/libs/makeutils/chart.mk

@@ -1,5 +1,0 @@
-apiVersion: v2
-description: EKS Cluster Stack Helm chart for
-name: cluster-stack
-type: application
-version: 3.1.0
