@@ -1,34 +1,79 @@
+# Define your repository and credential
+imagePullSecret: secret-registry
+
+
 replicaCount: 1
 
 image:
-  repository: 541407012130.dkr.ecr.us-east-1.amazonaws.com/prod-landing:81610cd7
+  name: 
   pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag:  
 
-imagePullSecret: secret-registry
+env:
+  ENV: "prod"
+  DB_HOST: REPLACE_DB_URL
+  DEPLOY_ENV: "prod"
+  DB_PORT: 5432
+  DB_NAME: "prod_mpaydb"
+  DB_USERNAME: "mscore"
+  DB_PASSWORD: "mscore"
+  DB_SCHEMA: "mscore"
+  REDIS_HOST: "redis-master.prod-infra.svc.cluster.local"
+  REDIS_PORT: 6379
 
-#Ingress controlls
-ingressName: ingress-prod-landing
-ingressHost: mpay-new.mpay.az
+secrets:
+  enabled: false
+  vaults:
+    - name: VAULT_ROLE_ID
+      valueFrom:
+        name: secret-vault
+        key: VAULT_ROLE_ID
+  vault_secret_name: secret-vault
 
+# Container  Port
+ports:
+  enabled: true
+  containerPort: 80
+
+# Service controlls
 service:
+  enabled: true
   type: ClusterIP
   port: 80
 
+# Default Container Termination Time
+terminationGracePeriodSeconds: 30
 
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+#Health Checks
+resources:
+  enabled: true
+  limits:
+    memory: 512Mi
+    cpu: 500m
+  requests:
+    cpu: 25m
+    memory: 256Mi
 
-nodeSelector: {}
 
-tolerations: []
+readinessProbe:
+  enabled: true
+  httpGet:
+    path: /api/actuator/health
+    port: REPLACE_APP_PORT
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 1
+  successThreshold: 1
 
-affinity: {}
+livenessProbe:
+  enabled: true
+  httpGet:
+    path: /api/actuator/health
+    port: REPLACE_APP_PORT
+  initialDelaySeconds: 70
+  periodSeconds: 20
+  timeoutSeconds: 2
+  failureThreshold: 1
+  successThreshold: 1
