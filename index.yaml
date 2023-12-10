@@ -11,6 +11,6 @@ entries:
     name: prod
     type: application
     urls:
-    - https://github.com/rbutdayev/helmrepo/mpprod-1.0.0.tgz
+    - https://github.com/rbutdayev/helmrepo/prod-1.0.0.tgz
     version: 1.0.0
 generated: "2023-12-11T01:10:31.804793+04:00"
