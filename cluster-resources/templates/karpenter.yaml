@@ -1,0 +1,31 @@
+
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: {{ .Values.eks.name  }}-ng
+spec:
+  subnetSelector:
+    karpenter.sh/discovery: {{ .Values.eks.name  }}
+  securityGroupSelector:
+    karpenter.sh/discovery: {{ .Values.eks.name  }}
+  tags:
+    karpenter.sh/discovery: {{ .Values.eks.name  }}
+    iomete.com/managed: "true"
+    iomete.com/terraform: "true"
+    iomete.com/cluster_id: {{ .Values.clusterId  }}
+    iomete.com/cluster_name: {{ .Values.clusterName  }}
+
+---
+
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: ng-provisioner
+spec:
+  requirements:
+    - key: karpenter.sh/capacity-type
+      operator: In
+      values: ["on-demand"]
+  providerRef:
+    name: {{ .Values.eks.name  }}-ng
+  ttlSecondsAfterEmpty: 30
