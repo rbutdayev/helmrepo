@@ -11,14 +11,14 @@ image:
   tag:  
 
 env:
-  ENV: "prod"
+  ENV: " "
   DB_HOST: REPLACE_DB_URL
-  DEPLOY_ENV: "prod"
+  DEPLOY_ENV: " "
   DB_PORT: 5432
-  DB_NAME: "prod_mpaydb"
-  DB_USERNAME: "mscore"
-  DB_PASSWORD: "mscore"
-  DB_SCHEMA: "mscore"
+  DB_NAME: " "
+  DB_USERNAME: " "
+  DB_PASSWORD: " "
+  DB_SCHEMA: " "
   REDIS_HOST: "redis-master.prod-infra.svc.cluster.local"
   REDIS_PORT: 6379
 
