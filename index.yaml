@@ -13,4 +13,17 @@ entries:
     urls:
     - https://raw.githubusercontent.com/rbutdayev/helmrepo/main/prod-1.0.0.tgz
     version: 1.0.0
+  abhi:
+  - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2023-12-11T01:10:31.806397+04:00"
+    description: A Helm chart for Kubernetes
+    digest: aaa94ef47915e75e99a18a4731b761f9a69445993239f0f8fae3c94352316d19
+    maintainers:
+    - name: Ruslan
+    name: abhi
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/rbutdayev/helmrepo/main/abhi-1.0.0.tgz
+    version: 1.0.0
 generated: "2023-12-11T01:10:31.804793+04:00"
