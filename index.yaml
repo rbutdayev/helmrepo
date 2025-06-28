@@ -76,6 +76,6 @@ entries:
     name: transport-services
     type: application
     urls:
-    - https://raw.githubusercontent.com/rbutdayev/helmrepo/main/transport-services-2.0.8.tgz
-    version: 2.0.8
+    - https://raw.githubusercontent.com/rbutdayev/helmrepo/main/transport-services-2.0.9.tgz
+    version: 2.0.9
 generated: "2025-06-19T01:10:31.804793+04:00"
