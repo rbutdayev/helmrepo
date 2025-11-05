@@ -63,8 +63,8 @@ entries:
     name: kanda
     type: application
     urls:
-    - https://raw.githubusercontent.com/rbutdayev/helmrepo/main/kanda-1.0.4.tgz
-    version: 1.0.4
+    - https://raw.githubusercontent.com/rbutdayev/helmrepo/main/kanda-1.0.1.tgz
+    version: 1.0.1
   transport-services:
   - apiVersion: v2
     appVersion: 2.0.0
