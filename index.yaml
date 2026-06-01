@@ -76,8 +76,8 @@ entries:
     name: transport-services
     type: application
     urls:
-    - https://raw.githubusercontent.com/rbutdayev/helmrepo/main/transport-services-2.4.2.tgz
-    version: 2.4.2
+    - https://raw.githubusercontent.com/rbutdayev/helmrepo/main/transport-services-2.4.3.tgz
+    version: 2.4.3
 
 
   kxvis-services:
