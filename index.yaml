@@ -24,8 +24,8 @@ entries:
     name: mpay-services
     type: application
     urls:
-    - https://raw.githubusercontent.com/rbutdayev/helmrepo/main/mpay-services-2.0.1.tgz
-    version: 2.0.1
+    - https://raw.githubusercontent.com/rbutdayev/helmrepo/main/mpay-services-2.0.2.tgz
+    version: 2.0.2
   abhi:
   - apiVersion: v2
     appVersion: 2.0.0
