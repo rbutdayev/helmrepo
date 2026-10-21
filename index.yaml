@@ -15,6 +15,18 @@ entries:
     version: 1.0.0
   mpay:
   - apiVersion: v2
+    appVersion: 2.0.3
+    created: "2026-10-21T11:45:00.000000+04:00"
+    description: Mpay services helm chart.
+    digest: 589172892275b3fa04f70f4f29edf2f248d68736c521cd4a44ea8eebe60975b1
+    maintainers:
+    - name: Ruslan Butdayev
+    name: mpay-services
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/rbutdayev/helmrepo/main/mpay-services-2.0.3.tgz
+    version: 2.0.3
+  - apiVersion: v2
     appVersion: 2.0.1
     created: "2024-04-03T01:10:31.806397+04:00"
     description: A Helm chart for kubernetes services
